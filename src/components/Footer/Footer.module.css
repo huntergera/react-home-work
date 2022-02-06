@@ -1,0 +1,16 @@
+.footer {
+    background: grey;
+    padding: 20px 0;
+    flex: 0 0 auto;
+}
+
+.footerNavbar {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.footerNavbarLink {
+    color: #000;
+    margin: 0 10px;
+}
