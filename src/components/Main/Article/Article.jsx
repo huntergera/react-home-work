@@ -5,12 +5,17 @@ import Spinner from "../../shared/Spinner/Spinner";
 class Article extends React.Component {
     constructor(props) {
         super(props);
-        const {currentItem} = props;
         this.state = {
             error: null,
             isLoaded: true,
-            inputTitle: currentItem.title
+            inputTitle: ""
         }
+    }
+
+    componentDidMount() {
+        this.setState({
+            inputTitle: this.props.currentItem.title
+        });
     }
 
     onDeleteArticle = () => {
