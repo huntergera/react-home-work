@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Article.module.css"
+import Spinner from "../../shared/Spinner/Spinner";
 
 class Article extends React.Component {
     constructor(props) {
@@ -22,7 +23,6 @@ class Article extends React.Component {
                 ...this.state,
                 error: error
             }))
-
     }
 
     onTitleChange = event => {
@@ -42,12 +42,17 @@ class Article extends React.Component {
             },
         })
             .then((response) => response.json())
-            .then(response => this.props.onArticleUpdated(response))
+            .then(response => {
+                this.setState({
+                    isLoaded: false,
+                });
+                this.props.onArticleUpdated(response)
+
+            })
             .catch(error => this.setState({
                 ...this.state,
                 error: error
             }))
-
     }
 
     render() {
@@ -55,7 +60,7 @@ class Article extends React.Component {
         const {title, body} = this.props.currentItem;
 
         if (error) return <p className='errorText'>Error</p>;
-        if (!isLoaded) return <p>Loading...</p>;
+        if (!isLoaded) return <Spinner height="80" width="50" color="#ffe07d"/>;
 
         return (
             <article className={styles.article}>

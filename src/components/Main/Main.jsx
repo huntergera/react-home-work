@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Main.module.css"
 import Article from "./Article/Article";
+import Spinner from "../shared/Spinner/Spinner";
 
 class Main extends React.Component {
     constructor(props) {
@@ -30,7 +31,6 @@ class Main extends React.Component {
     }
 
     onArticleUpdated = article => {
-        console.log(article)
         this.setState({
             ...this.state,
             items: this.state.items.map(item => article.id === item.id ? article : item)
@@ -38,7 +38,6 @@ class Main extends React.Component {
     }
 
     onArticleDeleted = article => {
-        console.log(article)
         this.setState({
             ...this.state,
             items: this.state.items.filter(item => article.id !== item.id )
@@ -61,7 +60,7 @@ class Main extends React.Component {
         if (!isLoaded) return(
             <main className={styles.main}>
                 <div className="container">
-                    <p className='loadingText'>Loading...</p>
+                    <Spinner height="100" width="100" color="#ffe07d"/>
                 </div>
             </main>
         )
