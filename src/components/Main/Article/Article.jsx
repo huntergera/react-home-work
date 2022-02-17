@@ -1,13 +1,11 @@
 import React from "react";
 import styles from "./Article.module.css"
-import Spinner from "../../shared/Spinner/Spinner";
 
 class Article extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             error: null,
-            isLoaded: true,
             inputTitle: ""
         }
     }
@@ -43,9 +41,6 @@ class Article extends React.Component {
         })
             .then((response) => response.json())
             .then(response => {
-                // this.setState({
-                //     isLoaded: false,
-                // });
                 this.props.onArticleUpdated(response)
 
             })
@@ -56,11 +51,10 @@ class Article extends React.Component {
     }
 
     render() {
-        const {inputTitle, error, isLoaded} = this.state;
+        const {inputTitle, error} = this.state;
         const {title, body} = this.props.currentItem;
 
         if (error) return <p className='errorText'>Error</p>;
-        if (!isLoaded) return <Spinner height="80" width="50" color="#ffe07d"/>;
 
         return (
             <article className={styles.article}>
