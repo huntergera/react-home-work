@@ -22,12 +22,7 @@ class Article extends React.Component {
         fetch(`https://jsonplaceholder.typicode.com/posts/${this.props.currentItem.id}`, {
             method: 'DELETE',
         })
-            .then((response) => response.json())
-            .then(response => this.props.onArticleDeleted(response))
-            .catch(error => this.setState({
-                ...this.state,
-                error: error
-            }))
+        this.props.onArticleDeleted(this.props.currentItem);
     }
 
     onTitleChange = event => {
@@ -48,9 +43,9 @@ class Article extends React.Component {
         })
             .then((response) => response.json())
             .then(response => {
-                this.setState({
-                    isLoaded: false,
-                });
+                // this.setState({
+                //     isLoaded: false,
+                // });
                 this.props.onArticleUpdated(response)
 
             })
